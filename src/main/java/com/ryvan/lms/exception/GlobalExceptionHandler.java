@@ -11,13 +11,6 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-  
-  /**
-   * Handle IllegalArgumentException.
-   *
-   * @param ex the exception
-   * @return the error response
-   */
   @ExceptionHandler(IllegalArgumentException.class)
   public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex) {
     Map<String, Object> body = new LinkedHashMap<>();
@@ -29,12 +22,6 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
   }
   
-  /**
-   * Handle general exceptions.
-   *
-   * @param ex the exception
-   * @return the error response
-   */
   @ExceptionHandler(Exception.class)
   public ResponseEntity<Object> handleException(Exception ex) {
     Map<String, Object> body = new LinkedHashMap<>();

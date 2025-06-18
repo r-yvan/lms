@@ -18,13 +18,6 @@ public class BookService {
     this.bookRepository = bookRepository;
   }
   
-  /**
-   * Create a new book.
-   *
-   * @param bookRequestDTO the book data
-   * @return the created book
-   * @throws IllegalArgumentException if a book with the same ISBN already exists
-   */
   @Transactional
   public BookResponseDTO createBook(BookRequestDTO bookRequestDTO) {
     if (bookRepository.existsByIsbn(bookRequestDTO.getIsbn())) {
@@ -41,14 +34,6 @@ public class BookService {
     return convertToResponseDTO(savedBook);
   }
   
-  /**
-   * Get book details by ISBN.
-   *
-   * @param isbn the ISBN to search for
-   * @return the book details
-   * @throws IllegalArgumentException if no book with the given ISBN is found
-   */
-  
   @Transactional(readOnly = true)
   public BookResponseDTO getBookByIsbn(String isbn) {
     Book book = bookRepository.findByIsbn(isbn)
@@ -56,13 +41,6 @@ public class BookService {
     return convertToResponseDTO(book);
   }
   
-  /**
-   * Get book availability by ISBN.
-   *
-   * @param isbn the ISBN to check
-   * @return the availability status as a string
-   * @throws IllegalArgumentException if no book with the given ISBN is found
-   */
   @Transactional(readOnly = true)
   public String getBookAvailability(String isbn) {
     Book book = bookRepository.findByIsbn(isbn)
@@ -70,14 +48,6 @@ public class BookService {
     return book.getAvailabilityStatus().toString();
   }
   
-  /**
-   * Update book availability status.
-   *
-   * @param isbn   the ISBN of the book to update
-   * @param status the new availability status
-   * @return the updated book
-   * @throws IllegalArgumentException if no book with the given ISBN is found
-   */
   @Transactional
   public BookResponseDTO updateBookAvailability(String isbn, AvailabilityStatus status) {
     Book book = bookRepository.findByIsbn(isbn)
@@ -87,12 +57,6 @@ public class BookService {
     return convertToResponseDTO(updatedBook);
   }
   
-  /**
-   * Convert a Book entity to a BookResponseDTO.
-   *
-   * @param book the book entity
-   * @return the book response DTO
-   */
   private BookResponseDTO convertToResponseDTO(Book book) {
     return new BookResponseDTO(
       book.getId(),

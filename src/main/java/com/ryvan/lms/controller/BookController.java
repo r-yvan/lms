@@ -18,12 +18,6 @@ public class BookController {
     this.bookService = bookService;
   }
   
-  /**
-   * Create a new book.
-   *
-   * @param bookRequestDTO the book data
-   * @return the created book
-   */
   @PostMapping
   public ResponseEntity<BookResponseDTO> createBook(@RequestBody BookRequestDTO bookRequestDTO) {
     try {
@@ -34,12 +28,6 @@ public class BookController {
     }
   }
   
-  /**
-   * Get book details by ISBN.
-   *
-   * @param isbn the ISBN to search for
-   * @return the book details
-   */
   @GetMapping("/{isbn}")
   public ResponseEntity<BookResponseDTO> getBookByIsbn(@PathVariable String isbn) {
     try {
@@ -50,12 +38,6 @@ public class BookController {
     }
   }
   
-  /**
-   * Get book availability by ISBN.
-   *
-   * @param isbn the ISBN to check
-   * @return the availability status
-   */
   @GetMapping("/{isbn}/availability")
   public ResponseEntity<String> getBookAvailability(@PathVariable String isbn) {
     try {
